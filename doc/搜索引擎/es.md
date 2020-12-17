@@ -1,0 +1,531 @@
+
+
+# 初识
+
+
+
+## 介绍
+
+
+
+## 概念
+
+
+
+## 简单示例
+
+
+
+## 参考资料
+
+
+
+### 官方学习文档
+
+地址：https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+
+该地址下默认展示最新版本，可选择历史版本
+
+
+
+# 运维
+
+
+
+## 安装
+
+
+
+官方下载地址
+
+
+
+### Linux
+
+
+
+### Window
+
+
+
+### Mac
+
+#### 安装步骤
+
+
+
+### 查看版本
+
+
+
+**CURL方式**
+
+在 ES 服务已经正常启动的情况下，可以使用以下命令查看
+
+```shell
+curl -XGET localhost:9200
+```
+
+其中host和port可以替换成对应的值
+
+**返回结果**
+
+```json
+{
+  "name" : "yitaodeMacBook-Pro2.local",
+  "cluster_name" : "elasticsearch_brew",
+  "cluster_uuid" : "iHhp1SxgQBO15FH4gdE-OQ",
+  "version" : {
+    "number" : "7.9.2-SNAPSHOT",
+    "build_flavor" : "oss",
+    "build_type" : "tar",
+    "build_hash" : "unknown",
+    "build_date" : "2020-10-03T08:22:40.976826Z",
+    "build_snapshot" : true,
+    "lucene_version" : "8.6.2",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+```
+
+其中 **version.number** 的值即为版本号，在以上返回结果中版本号为：<span style="color:red">7.9.2-SNAPSHOT</span>
+
+
+
+## 服务升级
+
+
+
+## 数据备份和恢复
+
+
+
+
+
+# 管理
+
+
+
+## 查询集群状态
+
+
+
+```shell
+GET ${host}:${port}/_cat/healthy?v
+```
+
+
+
+```bash
+epoch      timestamp cluster status node.total node.data shards  pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
+1603857278 03:54:38  haizhi  yellow          1         1   4535 4535    0    0     4535             0                  -                 50.0%
+```
+
+
+
+
+
+## 查询索引状态
+
+
+
+```shell
+GET ${host}:${port}/_cat/indices?v
+```
+
+
+
+```shell
+health status index                                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   graph_police2.travel                            0xJd7TV-TeyH-dDz0nxmbA   5   1       1011            1    733.4kb        733.4kb
+yellow open   janus_chart_data_label_v_vertex_mixed_index     LDhfc81hTGuZUUnDC7Z-Sg   5   1          9            0     25.2kb         25.2kb
+yellow open   neo4j0921.person_new                            iqy_8PVxSzio-2nxpcwEEg   5   1       1000            0    232.1kb        232.1kb
+yellow open   dmc_test_types.huizong                          gPTOXINER1-F9bZ88G8MxA   5   1          1            0     11.7kb         11.7kb
+yellow open   qzx_1015.company                                VOcTKVzmR9-rb5E9tkLblQ   5   1          6            1     88.7kb         88.7kb
+yellow open   dmc_qzx.original_person_new001_error            EzJtPGGwSmKlRmRHt4mFHQ   5   1          1            0     10.7kb         10.7kb
+yellow open   major_test_0831.company227                      LuDaDr06T1OFSP__tEG74g   5   1          1            0     13.1kb         13.1kb
+yellow open   janus_chart_data_object_key_vertex_mixed_index  7aycsj-IR7mM6gbvE0r_xw   5   1          9            0       31kb           31kb
+yellow open   kgraph.invest                                   m6XE9XoUR0anG55smz40jQ   5   1     184786            0    115.9mb        115.9mb
+```
+
+
+
+
+
+## 获取index数据量
+
+
+
+```shell
+GET ${host}:${port}/${index}/_count
+```
+
+
+
+
+
+```json
+{
+    "count": 1011,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    }
+}
+```
+
+
+
+
+
+# 应用
+
+
+
+## 用例
+
+
+
+### 元数据字段
+
+在es 中用于描述文档本身信息的字段
+
+- _index
+- _id
+- _source
+
+
+
+### 数据类型
+
+#### 基础类型
+
+binary：base64编码的二进制数据
+
+boolean：布尔
+
+Keywords：包含 keyword，constant_keyword 和 wildcard
+
+Numbers：包含 long ，double
+
+Dates：包含 ， date_nanos
+
+alias：给已存在的字段定义一个别名
+
+
+
+#### 对象和关系类型
+
+object：json 对象
+
+flattened：An entire JSON object as a single field value.
+
+nested：A JSON object that preserves the relationship between its subfields.
+
+join：Defines a parent/child relationship for documents in the same index.
+
+
+
+#### 结构化数据类型
+
+Range：包含long_range，double_range,date_range和ip_range
+
+ip：包含IPv4和IPv6
+
+murmur3：Compute and stores hashes of values.
+
+
+
+#### 聚合数据类型
+
+histogram：Pre-aggregated numerical values.
+
+
+
+#### 文本搜索类型
+
+text：已分词，非结构化的文本
+
+annotated-text：Text containing special markup. Used for identifying named entities.
+
+completion：Used for auto-complete suggestions.
+
+search_as_you_type：`text`-like type for as-you-type completion.
+
+token_count：A count of tokens in a text.
+
+
+
+#### 文档排名类型
+
+dense_vector：Records dense vectors of float values.
+
+rank_feature：Records a numeric feature to boost hits at query time.
+
+rank_features：Records numeric features to boost hits at query time.
+
+
+
+#### 空间数据类型
+
+geo_point：以经纬度表示的信息
+
+geo_shape：Complex shapes, such as polygons.
+
+point：Arbitrary cartesian points.
+
+shape：Arbitrary cartesian geometries.
+
+
+
+#### 其他数据类型
+
+percolator：Indexes queries written in [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).
+
+
+
+### 数组
+
+在 ElasticSearch 中默认支持数组，在数组中每个元素类型需要保持一致
+
+
+
+### 多值字段
+
+多值字段用来索引不同应用场景下的功能，比如字符串类型的字段，可以同时建立text和keyword类型的值字段。
+
+对text类型的字段值建立全文索引，而keyword类型的字段值用来排序或者聚合。
+
+
+
+可以通过调用修改Mapping接口来增加多值字段
+
+
+
+### 索引
+
+大多数api支持对多index进行操作，如果需要对多个index进行操作可以使用以下几种方式
+
+1、多个索引间用英文逗号分割
+
+例如：test1,test2,test3
+
+2、使用内置_all获取所有index
+
+3、使用通配符
+
+例如：test* 或者 *test 亦或者 \*test\*
+
+其中test*表示以test开头的index
+
+*test表示以test结尾的index
+
+\*test\*表示包含test的index
+
+4、使用排除
+
+例如：test*,-test3
+
+表示匹配所有test开头的index，除了test3
+
+
+
+所有多index支持以下url查询参数
+
+* ignore_unavailable
+
+  忽略不存在或者关闭的index。取值范围：true,false
+
+* allow_no_indices
+
+  当使用通配符匹配index时，无结果匹配
+
+* expand_wildcards
+
+
+
+### 类型相关操作
+
+#### Mapping映射
+
+
+
+setting配置
+
+alia别名
+
+
+
+### 
+
+
+
+
+
+### 保存数据
+
+
+
+### 更新数据
+
+
+
+### 删除数据
+
+
+
+### 查询数据
+
+#### 查询目标字段
+
+#### 查询条件
+
+相等
+
+大于
+
+小于
+
+包含
+
+
+
+#### 分页
+
+
+
+#### 排序
+
+
+
+#### 高亮
+
+
+
+#### 聚合
+
+min
+
+max
+
+count
+
+date_range
+
+date_histogram
+
+
+
+#### 聚合过滤
+
+
+
+## 组件
+
+
+
+### 索引[ 6.7.0 +]
+
+此功能主要是用于管理时间序列数据的索引。
+
+对于时间序列的索引，生命周期有4个阶段：
+
+* hot：索引被频繁写入和查询
+* warm：索引不再写入，但是仍在查询 
+
+* cold：索引很久不被更新，同时很少被查询。但现在考虑删除数据还为时过早，仍然有需要这些数据的可能，但是可以接受较慢的查询响应。
+
+    * delete：索引不再需要，可以删除。
+
+
+
+### 分词器
+
+
+
+## 创建分词器
+
+```bash
+PUT 'localhost:9200/test'
+```
+
+
+
+```
+{
+	"settings": {
+		"analysis": {
+			"analyzer": {
+				"my_ngram_analyzer": {
+					"tokenizer": "my_ngram_tokenizer"
+				}
+			},
+			"tokenizer": {
+				"my_ngram_tokenizer": {
+					"type": "nGram",
+					"min_gram": "2",
+					"max_gram": "3",
+					"token_chars": ["letter", "digit"]
+				}
+			}
+		}
+	}
+}
+```
+
+
+
+## 分词
+
+
+
+```shell
+GET ${host}:${port}/_analyze
+```
+
+
+
+```
+{"analyzer" : "standard",  "text" : "床前明月光"}
+```
+
+空白分词器
+
+whitespace
+
+
+
+使用ik分析器
+
+ik_max_word
+
+
+
+
+
+# 原理
+
+保存数据原理
+
+更新数据原理
+
+删除数据原理
+
+查询数据原理
+
+
+
+
+
+
+
+
+
+
+
+
+
