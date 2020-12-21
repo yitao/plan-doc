@@ -1,0 +1,5 @@
+== 概述
+
+AsciiDoc是一种文本文档格式，可以用于书写文档，文章，手册，书籍和UNIX手册。AsciiDoc文件可以使用asciidoc命令转换成HTML和DocBook文件格式。AsciiDoc结构先进：AsciiDoc语法和输出标签（几乎可以转换成任意的SGML/XML标记）都可以由用户自己定义和扩展。
+
+https://github.com/stanzgy/wiki/blob/master/markup/asciidoc-guide.asciidoc[原文出处]
