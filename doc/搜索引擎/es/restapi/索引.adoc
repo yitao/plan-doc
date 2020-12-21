@@ -1,0 +1,15 @@
+== 索引相关 Rest Api
+
+创建索引 create index
+删除索引 delete index
+获取索引 get index
+判断索引是否存在 index exists
+关闭索引 close index
+开启索引 open index
+收缩索引 shrink index
+拆分索引 split index
+克隆索引 clone index
+翻转索引 rollover index
+冻结索引 freeze index
+解冻索引 unfreeze index
+溶解索引 resolve index

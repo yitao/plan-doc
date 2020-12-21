@@ -1,0 +1,100 @@
+== 管理
+
+Elasticsearch 自带各种管理工具和 API，可让您完全控制数据、用户、集群操作等方方面面。
+
+=== 索引生命周期管理
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html
+
+通过索引生命周期管理 (ILM)，用户能够定义并自动执行政策，进而控制某个索引在四个阶段中分别应该停留多长时间，还可以定义并自动执行在各个阶段针对索引所采取的行动集合。由于可以将数据置于不同的资源等级，所以这样能够更好地帮助节省运行成本。
+
+热节点：主动进行更新，也可查询
+
+温节点：不再进行更新，但仍可查询
+
+冷/冻节点：不再进行更新，也很少查询（尽管仍可以搜索，但速度会很慢）
+
+删除：不再需要 
+
+=== 数据层
+
+数据层是通过节点角色属性将数据划分为热、温和冷节点的形式化方法，该属性自动定义节点的索引生命周期管理策略。通过分配热节点、温节点和冷节点角色，可以大大简化将数据从成本较高、性能较高的存储移到成本较低、性能较低的存储的过程，并促进整个过程的自动化，所有这些都不会影响您获得洞见的能力。
+
+热节点：在大多数性能实例上主动进行更新和查询
+
+温节点：在性能较低的实例上查询数据的频率较低
+
+冷节点：只读、很少被查询、显著减少存储而不降低性能，由可搜索快照提供支持
+
+https://www.elastic.co/guide/en/elasticsearch/reference/7.10/data-tiers.html
+
+=== 冻结索引
+
+Elasticsearch 索引会在内存中保存部分数据结构，从而允许您高效地对其进行搜索并向其中索引数据。为了减少内存使用量（同时降低运行成本），Elasticsearch 可以将不常使用的数据存储在冻结索引（并不保存在内存中）中。查询此类数据时，它们会临时加载到内存中，然后在查询完成后再从内存中释放出来。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/frozen-indices.html
+
+=== 快照生命周期管理
+
+作为后端的快照管理工具，快照生命周期管理 (SLM) API 能够允许管理员定义对 Elasticsearch 集群进行快照的频率。通过专属 UI，SLM 能够让用户为 SLM 政策配置保留期，自动创建/删除快照，并自动预先安排好快照事宜——这能够确保以合理频率对特定集群进行快照，从而按照客户的 SLA 进行恢复。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-lifecycle-management-api.html
+
+
+=== 快照和还原
+
+快照指基于正在运行的 Elasticsearch 集群制作的备份。您可以对单个索引或整个集群进行快照，然后将快照存储在共享文件系统上的存储库中。我们同时还提供插件来为远程存储库提供支持。
+
+- 文件系统
+- S3
+- HDFS
+- Azure
+- Google Cloud Storage
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html
+
+
+=== 可搜索快照
+
+可搜索快照使您能够直接查询快照，相比一次典型的从快照完成还原所需的时间，用时只是其中的一小部分，因为仅需读取每个快照索引的必要部分即可完成请求。可搜索快照与冷层一起使用，可以在基于对象的存储系统（如 Amazon S3、Azure Storage 或 Google Cloud Storage）中备份副本分片，同时仍提供对它们的完全搜索访问权限，从而显著降低数据存储成本。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/7.10/searchable-snapshots.html
+
+=== 纯源快照
+
+通过使用源内容存储库，您能够创建规模极小的纯源快照，其节省的磁盘空间可高达 50%。纯源快照包含存储的字段和索引元数据。它们不包括索引或文档值结构，而且恢复后也不能进行搜索。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html#_source_only_repository
+
+
+=== 数据汇总
+
+保存历史数据以进行分析是一项十分有用的实践，但人们经常会由于存档大量数据带来的巨大财务成本而不这么做。因此，保留期限的长短由财务现实决定，而不会取决于大量历史数据的帮助作用。汇总功能为人们提供了一种汇总和存储历史数据的方法，这样人们仍可用其来进行分析，但是成本与存储原始数据相比却要小得多。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/xpack-rollup.html
+
+
+=== 数据流
+
+数据流能够让您以便捷、可扩展的方式来采集、搜索和管理持续生成的时序数据。
+
+
+=== Transforms
+
+Transforms 是两维的表格式数据结构，可以让索引后的数据更加易于分解。Transforms 能够执行聚合，对您的数据进行透视，形成以实体为中心的新索引。通过对数据进行转化和汇总，您便有可能通过其他方法（包括将其作为其他 Machine Learning 分析的数据源）对这些数据进行可视化和分析。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/transforms.html
+
+
+=== 升级助手 API
+
+通过升级助手 API，您能够检查 Elasticsearch 集群的升级状态，并对在之前重大版本中创建的索引进行重新索引。这一助手能够帮助您为下一次 Elasticsearch 重大版本升级做好准备。
+
+https://www.elastic.co/guide/en/kibana/current/upgrade-assistant-api.html
+
+
+=== API 密钥管理
+
+API 秘钥的管理过程必须足够灵活，以便允许用户管理他们自己的秘钥，限制他们各自角色的访问权限。通过专属 UI，用户能够创建 API 秘钥并用其来提供长期凭据，同时与 Elasticsearch 进行交互；对自动化脚本和与其他软件间的工作流集成而言，这一交互过程十分常见。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html

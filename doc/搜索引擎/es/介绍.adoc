@@ -1,0 +1,7 @@
+
+
+Elasticsearch 是一个分布式的 RESTful 搜索和分析引擎，可用来集中存储您的数据，以便您对形形色色、规模不一的数据进行搜索、索引和分析。 
+
+
+官方特性地址：
+https://www.elastic.co/cn/elasticsearch/features

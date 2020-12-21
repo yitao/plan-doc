@@ -1,0 +1,77 @@
+== Security
+
+Elastic Stack 的 Security 功能会向正确的人员授予正确的访问权限。IT、运营和应用程序团队能够依赖这些功能来管理善意用户并阻隔恶意破坏人员；与此同时，Elastic Stack 中存储的数据始终享有可靠的安全保障，公司高管和客户都能高枕无忧。
+
+
+=== 配置设置
+
+有些设置是敏感的，仅依靠文件系统权限来保护它们的值是不够的。对于这个用例，Elasticsearch提供了一个密钥存储库来防止对敏感集群设置的不必要的访问。可以选择对密钥存储库进行密码保护，以提高安全性。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-settings.html
+
+=== 加密通信
+
+通过流量加密，以及使用 SSL/TLS、节点身份验证证书等等，可以有效阻止针对 Elasticsearch 节点数据的网络攻击。
+
+https://www.elastic.co/guide/en/elastic-stack-overview/current/encrypting-communications.html
+
+=== 数据静态加密支持
+
+虽然 Elastic Stack 不能直接实施数据静态加密，但我们建议在所有主机上都配置磁盘级别加密。此外，快照目标也必须确保对数据进行静态加密。
+
+
+=== 基于角色的访问控制 (RBAC)
+
+借助基于角色的访问控制 (RBAC)，您能够通过为角色分配权限以及为用户或群组分配角色来为用户授权。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/authorization.html#roles
+
+=== 基于属性的访问控制 (ABAC)
+
+Elastic Stack 的 Security 功能同时还提供基于属性的访问控制 (ABAC) 机制，通过该机制，您能够使用属性来限制搜索查询和聚合中文档的访问权限。这一功能可让您在角色定义中实施访问政策，这样用户只有在拥有全部必备属性时，才能读取特定文档。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/authorization.html#attributes
+
+
+=== 字段级和文档级安全性
+
+字段级安全性能够限制用户有权访问的字段。具体而言，其能限制从基于文档的只读 API 中可以访问哪些字段。
+
+https://www.elastic.co/guide/en/elastic-stack-overview/current/field-level-security.html[了解字段级安全性]
+
+文档级安全性能够限制用户有权访问的文档。具体而言，其能限制从基于文档的只读 API 中可以访问哪些文档。
+
+https://www.elastic.co/guide/en/elastic-stack-overview/current/document-level-security.html[了解文档级安全性]
+
+
+=== 审计日志
+
+您可以启用审计来跟踪安全相关事件（例如身份验证失败以及遭拒的连接请求）。对这些事件进行日志记录能够让您监测自己集群中的可疑活动，并在遭受攻击时提供证据。
+
+https://www.elastic.co/guide/en/elastic-stack-overview/current/auditing.html[了解审计日志]
+
+IP 筛选
+
+您可以针对应用程序客户端、节点客户端或者传输客户端（而不仅局限于尝试加入集群的其他节点）应用 IP 筛选。如果某节点的 IP 地址在黑名单中，Elasticsearch 安全功能虽允许其连接至 Elasticsearch，但会立即断开连接且不会处理任何请求。
+
+IP 地址或范围
+
+xpack.security.transport.filter.allow:"192.168.0.1"
+xpack.security.transport.filter.deny:"192.168.0.0/24"
+
+白名单
+
+xpack.security.transport.filter.allow: [ "192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4" ]
+xpack.security.transport.filter.deny: _all
+
+IPv6
+
+xpack.security.transport.filter.allow:"2001:0db8:1234::/48"
+xpack.security.transport.filter.deny:"1234:0db8:85a3:0000:0000:8a2e:0370:7334"
+
+主机名
+
+xpack.security.transport.filter.allow: localhost
+xpack.security.transport.filter.deny: '*.google.com'
+
+https://www.elastic.co/guide/en/elastic-stack-overview/current/ip-filtering.html[了解 IP 筛选]
