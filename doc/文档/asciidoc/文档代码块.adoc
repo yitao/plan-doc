@@ -1,5 +1,11 @@
-= 使用 AsciiDoc 编写文档 =
-Joe Bloggs <jbloggs@mymail.com>
-v2.0, February 2003:
+= AsciiDoc 文档代码块 =
+yitao <528171154@qq.com>
+v1.0,2020-12-18
 
-Rewritten for version 2 release.
+
+### 注释块
+----
+////
+CommentBlock（注释块）不输出到目标文件
+////
+----

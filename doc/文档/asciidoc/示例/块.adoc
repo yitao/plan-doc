@@ -1,0 +1,68 @@
+
+### CommentBlock
+////
+CommentBlock（注释块）不输出到目标文件
+////
+
+---
+
+### PassthroughBlock
+++++
+PassthroughBlock，不转换内部的特殊字符
+----
+#
+##
+++++
+
+---
+
+### ListingBlock
+----
+ListingBlock（清单块）
+用于计算机的输出和文件列表。也可用于程序代码。里面特殊字符不替换。
+----
+
+---
+
+### LiteralBlock
+....
+LiteralBlock（文字块）
+就像普通文字段落，保留了空格，使用[listing]块标题可以在内部引用其他块样式。
+....
+
+---
+
+### SidebarBlock
+****
+SidebarBlock（侧边栏）
+有边框和背景
+****
+
+---
+
+### QuoteBlock
+
+____
+QuoteBlock（引用块）
+____
+
+
+---
+
+### ExampleBlock
+
+====
+ExampleBlock（例子块）
+会使用数字编号的例子标题[caption="例1: "]
+可以使用NOTE, TIP, IMPORTANT, WARNING, CAUTION标题[NOTE]表示提示块
+====
+
+---
+
+### OpenBlock
+
+--
+OpenBlock（开放块）
+1、xxx
+2、xxx
+--
