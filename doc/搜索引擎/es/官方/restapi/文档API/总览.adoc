@@ -1,0 +1,33 @@
+
+
+Single document APIs
+
+Index
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html
+
+Get
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html
+
+Delete
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
+
+Update
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
+
+
+Multi-document APIs
+
+Multi get
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html
+
+Bulk
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+
+Delete by query
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+
+Update by query
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
+
+Reindex
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html

@@ -1,0 +1,77 @@
+获取API编辑
+从索引检索指定的JSON文档。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html#docs-get
+
+请求
+GET <index>/_doc/<_id>
+
+HEAD <index>/_doc/<_id>
+
+GET <index>/_source/<_id>
+
+HEAD <index>/_source/<_id>
+
+描述
+您可以使用GET从特定索引中检索文档及其源或存储字段。使用HEAD验证文档是否存在。您可以使用_source资源来仅检索文档源，或验证它是否存在。
+
+
+#### 路径参数
+<index>
+（必需，字符串）包含文档的索引名称。
+<_id>
+（必需，字符串）文档的唯一标识符。
+
+#### 查询参数
+preference
+（可选，字符串）指定应该对其执行操作的节点或分片。默认为随机。
+realtime
+（可选，布尔值）如果为true，则请求是实时的，而不是近实时的。默认为true。请参阅实时。
+refresh
+（可选，布尔值）如果为true，Elasticsearch刷新受影响的分片以使该操作可见以进行搜索。如果为false，则不执行任何刷新操作。默认为false。
+routing
+（可选，字符串）以指定的主分片为目标。
+stored_fields
+（可选，布尔值）如果为true，则检索存储在索引中的文档字段，而不是document _source。默认为false。
+_source
+（可选，字符串）返回true或false_source或不返回该字段，或返回一个字段列表。
+_source_excludes
+（可选，字符串）要从响应中排除的源字段的逗号分隔列表。
+
+您还可以使用此参数从_source_includes查询参数中指定的子集中排除字段 。
+
+如果_source参数为false，则忽略此参数。
+
+_source_includes
+（可选，字符串）包含在响应中的源字段的逗号分隔列表。
+
+如果指定此参数，则仅返回这些源字段。您可以使用_source_excludes查询参数从此子集中排除字段。
+
+如果_source参数为false，则忽略此参数。
+
+version
+（可选，整数）用于并发控制的显式版本号。指定的版本必须与文档的当前版本匹配，以便请求成功。
+version_type
+（可选，枚举）特定版本类型：internal，external， external_gte。
+
+#### 返回结果
+_index
+文档所属索引的名称。
+_type
+文件类型。Elasticsearch索引现在支持单一文档类型_doc。
+_id
+文档的唯一标识符。
+_version
+文件版本。每次更新文档时增加。
+_seq_no
+分配给文档以进行索引操作的序列号。序列号用于确保文档的旧版本不会覆盖新版本。请参阅乐观并发控制。
+_primary_term
+为索引操作分配给文档的主要术语。请参阅乐观并发控制。
+found
+指示文档是否存在：true或false。
+_routing
+显式路由（如果已设置）。
+_source
+如果found为true，则包含以JSON格式设置的文档数据。如果_source参数设置为false或stored_fields 参数设置为，则排除在外true。
+_fields
+如果stored_fields参数设置为true和found为 true，则包含存储在索引中的文档字段。

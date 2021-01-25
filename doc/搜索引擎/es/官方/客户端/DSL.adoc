@@ -1,0 +1,5 @@
+## Elasticsearch DSL
+
+Elasticsearch 提供一套基于 JSON 的完整查询 DSL（域特定语言），可用来定义查询。查询 DSL 为全文本搜索（包括词汇和短语匹配、模糊匹配、通配符、regex、嵌套查询、地理查询等等）提供了强大的搜索选项。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html[了解 Elasticsearch DSL]

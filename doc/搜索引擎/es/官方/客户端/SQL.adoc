@@ -1,0 +1,5 @@
+## Elasticsearch SQL
+
+Elasticsearch SQL 这项功能可以允许针对 Elasticsearch 实时执行类似 SQL 的查询。无论使用的是 REST 界面、命令行，还是 JDBC，所有客户端都能在 Elasticsearch 中以原生方式使用 SQL 进行数据搜索和聚合。
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-overview.html[了解 Elasticsearch SQL]
