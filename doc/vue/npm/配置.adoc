@@ -1,0 +1,19 @@
+
+
+npm config set registry https://registry.npm.taobao.org
+
+// 配置后可通过下面方式来验证是否成功
+
+npm config get registry
+或者
+npm info express
+
+清除已设置的npm淘宝镜像
+npm config delete registry
+npm config delete disturl
+或者
+npm config edit
+找到淘宝那两行,删除
+
+可以通过下面的命令直接将npm换成cnpm
+sudo npm install -g cnpm --registry=https://registry.npm.taobao.org
