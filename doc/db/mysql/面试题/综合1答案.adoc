@@ -1,0 +1,14 @@
+
+
+### count(1) 和 count(*) 的区别是怎样的？
+
+以下是关于InnoDB的， 1.count(1) 和 count() 一般用来统计全表数据量，包含null值。count(列名)只会统计该列不为null的总数。 所以数量上count(1) = count() >= count(列名)。
+
+2.从MySQL5.7开始，提供了追踪优化器功能。优化器在优化SQL之前，就把 couont() 格式化成 count(0)。 但是，count(列名) 并没有优化成其他，因为要去掉null值 所以性能上 count(1) = count() > count(列名)
+
+以下是关于myisam的：
+
+    Myisam表中，只执行 select count() from table，没有任何条件，没有任何其他返回值。则会很快返回总行数。 因为Myisam引擎存储了精确的行数，并且可以非常快速地访问。并且只有在第一列定义为NOT NULL时，COUNT(1)才会跟count()一样。
+
+    MYISAM 的count() 性能高于 InnoDB的count().由于 MVCC 多版本并发控制，InnoDB中不能保存精确的总行数
+
