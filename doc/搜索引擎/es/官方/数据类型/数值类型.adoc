@@ -1,0 +1,56 @@
+
+=== 数值类型
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html
+
+【v7.11】
+
+The following numeric types are supported:
+
+long
+
+
+A signed 64-bit integer with a minimum value of -2^63 and a maximum value of 2^63-1.
+
+integer
+
+
+A signed 32-bit integer with a minimum value of -2^31 and a maximum value of 2^31-1.
+
+short
+
+
+A signed 16-bit integer with a minimum value of -32,768 and a maximum value of 32,767.
+
+byte
+
+
+A signed 8-bit integer with a minimum value of -128 and a maximum value of 127.
+
+double
+
+
+A double-precision 64-bit IEEE 754 floating point number, restricted to finite values.
+
+float
+
+
+A single-precision 32-bit IEEE 754 floating point number, restricted to finite values.
+
+half_float
+
+
+A half-precision 16-bit IEEE 754 floating point number, restricted to finite values.
+
+scaled_float
+
+
+A floating point number that is backed by a long, scaled by a fixed double scaling factor.
+
+unsigned_long
+
+
+An unsigned 64-bit integer with a minimum value of 0 and a maximum value of 2^64-1.
+
+NOTE
+The double, float and half_float types consider that -0.0 and +0.0 are different values. As a consequence, doing a term query on -0.0 will not match +0.0 and vice-versa. Same is true for range queries: if the upper bound is -0.0 then +0.0 will not match, and if the lower bound is +0.0 then -0.0 will not match.
