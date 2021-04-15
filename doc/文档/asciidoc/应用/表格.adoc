@@ -15,7 +15,7 @@
 
 ### 简单表格
 
-image::image/表格1.png[]
+image::.images/表格1.png[]
 
 源码如下：
 
@@ -30,7 +30,7 @@ image::image/表格1.png[]
 
 ### 表格样式（加粗，合并，强调）
 
-image::image/表格2.png[]
+image::.images/表格2.png[]
 
 源码如下：
 
@@ -49,7 +49,7 @@ image::image/表格2.png[]
 
 ### 水平和垂直数据
 
-image::image/表格3.png[]
+image::.images/表格3.png[]
 
 Short cells can be entered horizontally, longer cells vertically.
 The default behavior is to strip leading and trailing blank lines within a cell.
@@ -81,7 +81,7 @@ hard + 1min really hard taking the HR up to 160).
 
 Table 9. A table with externally sourced CSV data
 
-image::image/表格4.png[]
+image::.images/表格4.png[]
 
 源码如下：
 
