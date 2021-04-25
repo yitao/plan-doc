@@ -95,7 +95,7 @@ include::customers.csv[]
 
 ### 跨行列布局
 
-![](表格5.png)
+image::表格5.png[]
 
 源码如下：
 

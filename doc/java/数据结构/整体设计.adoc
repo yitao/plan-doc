@@ -1,0 +1,34 @@
+
+
+集合的顶层接口 Collection
+
+. 根据内部元素的有序性
+.. 有序的List
+
+... 根据元素的数据结构
+.... 基于数组的ArrayList
+.... 基于链表的LinkedList
+
+* 有序的Queue
+
+* 无序的Set
+
+
+映射的顶层接口 Map
+
+. 线程安全性
+
+.. 线程不安全的HashMap
+... LinkedHashMap
+
+.. 线程安全的HashTable
+
+.. 线程安全的ConcurrentMap
+... ConcurrentHashMap
+... ConcurrentSkipListMap
+
+. 有序性SortedMap
+.. 结构
+... 树形结构TreeMap
+
+

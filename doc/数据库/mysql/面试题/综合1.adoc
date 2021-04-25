@@ -11,3 +11,5 @@
 . 谈谈 SQL 优化的经验
 
 . count(1) 和 count(*) 的区别是怎样的？
+
+image::.images/综合1.png[]

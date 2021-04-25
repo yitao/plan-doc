@@ -1,0 +1,44 @@
+B+树的优点：
+
+比较的次数均衡，减少了IO次数，提高了查找速度，查找也更稳定。
+
+B+树的磁盘读写代价更低B+树的查询效率更加稳定以上是索引的数据结构演化，下面我们再来讲一些关键概念。
+
+要知道的是，你每次创建表，系统会为你自动创建一个基于ID的聚集索引（上述B+树），存储全部数据；你每次增加索引，数据库就会为你创建一个附加索引（上述B+树），索引选取的字段个数就是每个节点存储数据索引的个数，注意该索引并不存储全部数据。
+
+回表
+
+比如你创建了name, age索引 ng_index，查询数据时使用了
+
+select * from table where name ='bill' and age = 21;
+
+由于附加索引中只有name 和 age，因此命中索引后，数据库还必须回去聚集索引中查找其他数据，这就是回表，这也是你背的那条：少用select * 的原因。
+
+索引覆盖
+
+结合回表会更好理解，比如上述ng_index索引，有查询
+
+select name, age from table where name ='bill' and age = 21;
+
+此时select的字段name,age在索引ng_index中都能获取到，所以不需要回表，满足索引覆盖，效率较高。
+
+最左匹配
+
+B+树的节点存储索引顺序是从左向右存储，在匹配的时候自然也要满足从左向右匹配；
+
+比如索引ng_index，下列sql都可以命中ng_index；
+
+select name from table where name = 'bill';select name, age from table where name = 'bill' and age = 18；
+
+索引下推
+
+还是索引ng_index，有如下sql
+
+select * from table where name like 'B%' and age > 20
+
+该语句有两种执行可能：
+
+命中ng_index联合索引，查询所有满足name以B开头的数据， 然后回表查询所有满足的行。命中ng_index联合索引，查询所有满足name以B开头的数据，然后直接筛出age>20的索引，再回表查询全行数据，显然第2种方式回表查询的行数较少，IO次数也会减少，这就是索引下推。所以不是所有like都不会命中索引。
+
+参考：
+https://baijiahao.baidu.com/s?id=1661980510559470562&wfr=spider&for=pc

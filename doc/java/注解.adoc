@@ -1,0 +1,13 @@
+注解
+
+
+
+使用限制:
+1、不允许注解中引用自身类型
+2、不允许注解中产生循环依赖
+3、不允许继承其他类，因为所有的注解的父类都是Annotation
+4、注解中只能有无参的方法定义
+
+
+
+参考：https://docs.oracle.com/javase/specs/jls/se6/html/interfaces.html#9.6
